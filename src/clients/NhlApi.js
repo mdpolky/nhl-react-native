@@ -41,3 +41,13 @@ export async function getStandings() {
     console.error(error);
   }
 }
+
+export async function getTeams() {
+  try {
+    const response = await fetch("https://statsapi.web.nhl.com/api/v1/teams");
+    const json = await response.json();
+    return json.teams.map((t) => t["id"]);
+  } catch (error) {
+    console.error(error);
+  }
+}

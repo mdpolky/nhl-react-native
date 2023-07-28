@@ -23,7 +23,7 @@ const StandingsTable = (props) => {
     "DIFF",
   ];
   const widthArr = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-  const rowArray = props.rows || [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]];
+  const rowArray = props.rows;
 
   return (
     <ScrollView horizontal={true}>
