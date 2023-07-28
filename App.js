@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { StatusBar } from "expo-status-bar";
 import MyTeamScreen from "./src/screens/MyTeamScreen";
 import NewsScreen from "./src/screens/NewsScreen";
 import ScoresScreen from "./src/screens/ScoresScreen";
@@ -18,6 +19,7 @@ export default function App() {
         <Tab.Screen name="Standings" component={StandingsScreen} />
         <Tab.Screen name="Menu" component={MenuScreen} />
       </Tab.Navigator>
+      <StatusBar />
     </NavigationContainer>
   );
 }

@@ -1,7 +1,13 @@
-<script src="http://localhost:8097"></script>;
 import React, { Component, useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { Table, TableWrapper, Row } from "react-native-reanimated-table";
+import * as NhlClient from "../clients/NhlApi";
 
 const StandingsTable = (props) => {
   const tableHead = [
@@ -48,51 +54,26 @@ const StandingsTable = (props) => {
   );
 };
 
-function dataToRow(data) {
-  if (!data) {
-    throw new TypeError("The data passed to dataToRow has an issue");
-  }
-  return [
-    data["team"]["name"],
-    data["gamesPlayed"],
-    data["leagueRecord"]["wins"],
-    data["leagueRecord"]["losses"],
-    data["leagueRecord"]["ot"],
-    data["points"],
-    Math.round((data["pointsPercentage"] + Number.EPSILON) * 1000) / 1000,
-    data["goalsScored"],
-    data["goalsAgainst"],
-    data["goalsScored"] - data["goalsAgainst"],
-  ];
-}
-
 export default function StandingsScreen() {
-  const [isLoading, setLoading] = useState(true);
-  const [tableRows, setTableRows] = useState([
-    ["Boston", 200, 3, 4, 5, 6, 7, 8, 9, 10],
-  ]);
-
-  const getStandings = async () => {
-    try {
-      const response = await fetch(
-        "https://statsapi.web.nhl.com/api/v1/standings/byLeague"
-      );
-      const json = await response.json();
-      setTableRows(json.records[0].teamRecords.map(dataToRow));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(true);
+  const [tableRows, setTableRows] = useState([[]]);
 
   useEffect(() => {
-    getStandings();
+    NhlClient.getStandings().then((result) => {
+      setIsLoading(false);
+      setTableRows(result);
+    });
   }, []);
 
   return (
     <View style={styles.container}>
-      {isLoading ? <ActivityIndicator /> : <StandingsTable rows={tableRows} />}
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#bada55" />
+        </View>
+      ) : (
+        <StandingsTable rows={tableRows} />
+      )}
     </View>
   );
 }
@@ -101,6 +82,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
   headerRow: {
     height: 50,
