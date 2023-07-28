@@ -60,8 +60,8 @@ export default function StandingsScreen() {
 
   useEffect(() => {
     NhlClient.getStandings().then((result) => {
-      setIsLoading(false);
       setTableRows(result);
+      setIsLoading(false);
     });
   }, []);
 

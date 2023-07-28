@@ -1,4 +1,3 @@
-<script src="http://localhost:8097"></script>;
 import { useState, useEffect } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { SvgUri } from "react-native-svg";
@@ -11,8 +10,8 @@ export default function MyTeamScreen() {
 
   useEffect(() => {
     NhlClient.getTeams().then((result) => {
-      setIsLoading(false);
       setTeams(result);
+      setIsLoading(false);
     });
   }, []);
 
@@ -47,6 +46,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
   teamLogo: {
     width: 80,
