@@ -50,10 +50,20 @@ const StandingsTable = (props) => {
 
 function dataToRow(data) {
   if (!data) {
-    console.log("error with standings data");
-    return;
+    throw new TypeError("The data passed to dataToRow has an issue");
   }
-  return [data["team"]["name"], 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  return [
+    data["team"]["name"],
+    data["gamesPlayed"],
+    data["leagueRecord"]["wins"],
+    data["leagueRecord"]["losses"],
+    data["leagueRecord"]["ot"],
+    data["points"],
+    Math.round((data["pointsPercentage"] + Number.EPSILON) * 1000) / 1000,
+    data["goalsScored"],
+    data["goalsAgainst"],
+    data["goalsScored"] - data["goalsAgainst"],
+  ];
 }
 
 export default function StandingsScreen() {
