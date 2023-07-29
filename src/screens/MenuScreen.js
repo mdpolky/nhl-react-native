@@ -1,9 +1,32 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
-export default function MenuScreen() {
+const About = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Menu!</Text>
+    <View style={styles.container}>
+      <View style={styles.aboutCard}>
+        <Text>NHL React Native App</Text>
+        <Text>Created by Matt Polky</Text>
+      </View>
     </View>
   );
+};
+
+export default function MenuScreen() {
+  return <About />;
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  aboutCard: {
+    flex: 1,
+    height: 200,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

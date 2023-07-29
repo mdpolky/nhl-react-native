@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   gameContainer: {
     height: 150,
-    borderWidth: 5,
+    borderWidth: 1,
     flexDirection: "row",
     padding: 50,
   },

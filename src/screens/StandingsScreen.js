@@ -81,7 +81,6 @@ export default function StandingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   loadingContainer: {
     flex: 1,
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     height: 50,
-    backgroundColor: "#cecece",
+    backgroundColor: "#fafafa",
   },
   text: {
     textAlign: "center",
@@ -104,10 +103,10 @@ const styles = StyleSheet.create({
   },
   row: {
     height: 40,
-    backgroundColor: "#E7E6E1",
+    backgroundColor: "#fff",
   },
   altRow: {
-    backgroundColor: "#F7F6E7",
+    backgroundColor: "#fafafa",
   },
   tableHeaderBorder: {
     borderWidth: 1,
