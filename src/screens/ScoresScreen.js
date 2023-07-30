@@ -1,4 +1,3 @@
-<script src="http://localhost:8097"></script>;
 import { useState, useEffect } from "react";
 import {
   ActivityIndicator,
