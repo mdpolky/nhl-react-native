@@ -58,7 +58,7 @@ export async function getGames(startDate) {
       `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${startDate}&endDate=${startDate}`
     );
     const json = await response.json();
-    return json.dates[0].games;
+    return json?.dates[0]?.games;
   } catch (error) {
     console.error(error);
   }

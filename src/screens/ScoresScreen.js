@@ -8,12 +8,16 @@ import {
   ScrollView,
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
+import {
+  ScoresHeaderRight,
+  ScoresHeaderLeft,
+} from "../components/header/Scores";
 
 const GameCard = (props) => {
   const game = props.game;
   const isHomeWin = game.teams.home.score > game.teams.away.score;
   return (
-    <View style={styles.gameContainer}>
+    <View style={styles.gameCardContainer}>
       <View style={styles.leftCard}>
         <Text style={!isHomeWin ? styles.highlightCardValue : styles.cardValue}>
           {game.teams.away.team.name}
@@ -35,29 +39,46 @@ const GameCard = (props) => {
   );
 };
 
-export default function ScoresScreen() {
+export default function ScoresScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [startDate, setStartDate] = useState("2023-01-01"); //todo: add datepicker
   const [games, setGames] = useState([[]]);
+  const [searchDate, setSearchDate] = useState("2023-07-30");
+
+  if (route.params && route.params.searchDate) {
+    setSearchDate(route.params.searchDate);
+  }
 
   useEffect(() => {
-    NhlClient.getGames(startDate).then((result) => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <ScoresHeaderLeft navigation={navigation} searchDate={searchDate} />
+      ),
+      headerRight: () => (
+        <ScoresHeaderRight navigation={navigation} searchDate={searchDate} />
+      ),
+    });
+
+    NhlClient.getGames(searchDate).then((result) => {
       setGames(result);
       setIsLoading(false);
     });
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#bada55" />
         </View>
-      ) : (
-        <View style={styles.container}>
+      ) : games ? (
+        <View style={styles.gamesContainer}>
           {games.map((game) => (
             <GameCard game={game} key={game.gamePk} />
           ))}
+        </View>
+      ) : (
+        <View style={styles.noGamesContainer}>
+          <Text>No games today</Text>
         </View>
       )}
     </ScrollView>
@@ -66,14 +87,23 @@ export default function ScoresScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    gap: 20,
+    flexGrow: 1,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
-  gameContainer: {
+  gamesContainer: {
+    flex: 1,
+    gap: 20,
+  },
+  noGamesContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gameCardContainer: {
     height: 150,
     borderWidth: 1,
     flexDirection: "row",

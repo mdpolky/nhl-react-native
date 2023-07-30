@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import MyTeamScreen from "./src/screens/MyTeamScreen";
 import NewsScreen from "./src/screens/NewsScreen";

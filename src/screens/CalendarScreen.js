@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { CalendarList } from "react-native-calendars";
 
-export default function CalendarScreen() {
-  const [selected, setSelected] = useState("");
+export default function CalendarScreen({ navigation, route }) {
+  const [selected, setSelected] = useState(
+    route.params && route.params.searchDate ? route.params.searchDate : ""
+  );
   return (
     <CalendarList
       showScrollIndicator={true}
