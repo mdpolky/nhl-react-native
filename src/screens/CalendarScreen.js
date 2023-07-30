@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { CalendarList } from "react-native-calendars";
 
 export default function CalendarScreen() {

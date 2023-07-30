@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { SvgUri } from "react-native-svg";
 import * as NhlClient from "../clients/NhlApi";
 
@@ -22,19 +28,22 @@ export default function MyTeamScreen() {
           <ActivityIndicator size="large" color="#bada55" />
         </View>
       ) : (
-        <View style={styles.container}>
-          {teams.map((id) => (
-            <SvgUri
-              style={
-                id === selectedTeamId
-                  ? styles.selectedTeamLogo
-                  : styles.teamLogo
-              }
-              key={id}
-              uri={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${id}.svg`}
-            />
-          ))}
-        </View>
+        <ScrollView>
+          <View style={styles.container}>
+            {teams.map((id) => (
+              <TouchableOpacity key={id} onPress={() => setSelectedTeamId(id)}>
+                <SvgUri
+                  style={
+                    id === selectedTeamId
+                      ? styles.selectedTeamLogo
+                      : styles.teamLogo
+                  }
+                  uri={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${id}.svg`}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
       )}
     </View>
   );
