@@ -40,7 +40,7 @@ export default function ScoresScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [games, setGames] = useState([[]]);
   const [searchDate, setSearchDate] = useState(
-    route.params?.searchDate ? route.params.searchDate : ""
+    route.params?.searchDate ? route.params.searchDate : "2023-01-02" //TODO: should this default to today()?
   );
   useEffect(() => {
     if (route.params) setSearchDate(route.params.searchDate);
