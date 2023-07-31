@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { SvgUri } from "react-native-svg";
 import * as NhlClient from "../clients/NhlApi";
+import * as Constants from "../components/constants";
 
 export default function MyTeamScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,7 @@ export default function MyTeamScreen() {
     <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#bada55" />
+          <ActivityIndicator size="large" color={Constants.accentColor} />
         </View>
       ) : (
         <ScrollView>
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
   selectedTeamLogo: {
     width: 80,
     height: 80,
-    backgroundColor: "#bada55",
+    backgroundColor: Constants.accentColor,
+    borderWidth: 1,
   },
 });

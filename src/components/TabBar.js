@@ -21,7 +21,9 @@ export function TabBar({ state, descriptors, insets, navigation }) {
             ? options.title
             : route.name;
         const isFocused = state.index === index;
-        const tabColor = isFocused ? "#bada55" : Constants.lightText;
+        const tabColor = isFocused
+          ? Constants.accentColor
+          : Constants.lightText;
 
         const onPress = () => {
           const event = navigation.emit({

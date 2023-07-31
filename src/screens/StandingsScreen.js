@@ -1,13 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
-import { Table, TableWrapper, Row } from "react-native-reanimated-table";
+import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
+import { Table, Row } from "react-native-reanimated-table";
 import * as NhlClient from "../clients/NhlApi";
+import * as Constants from "../components/constants";
 
 const StandingsTable = (props) => {
   const tableHead = [
@@ -69,7 +64,7 @@ export default function StandingsScreen() {
     <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#bada55" />
+          <ActivityIndicator size="large" color={Constants.accentColor} />
         </View>
       ) : (
         <StandingsTable rows={tableRows} />

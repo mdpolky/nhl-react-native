@@ -12,6 +12,7 @@ import {
   ScoresHeaderRight,
   ScoresHeaderLeft,
 } from "../components/header/Scores";
+import * as Constants from "../components/constants";
 
 const GameCard = (props) => {
   const game = props.game;
@@ -66,7 +67,7 @@ export default function ScoresScreen({ navigation, route }) {
     <ScrollView contentContainerStyle={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#bada55" />
+          <ActivityIndicator size="large" color={Constants.accentColor} />
         </View>
       ) : games ? (
         <View style={styles.gamesContainer}>
