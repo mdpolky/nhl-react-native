@@ -2,8 +2,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
 import MyTeamScreen from "./src/screens/MyTeamScreen";
 import NewsScreen from "./src/screens/NewsScreen";
 import ScoresScreen from "./src/screens/ScoresScreen";
@@ -15,6 +13,7 @@ import {
   ScoresHeaderRight,
 } from "./src/components/header/Scores";
 import { TabBar } from "./src/components/TabBar";
+import * as Constants from "./src/components/constants";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,6 +23,12 @@ function TabStack() {
     <Tab.Navigator
       initialRouteName="Scores"
       tabBar={(props) => <TabBar {...props} />}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Constants.darkBg,
+        },
+        headerTintColor: Constants.lightText,
+      }}
     >
       <Tab.Group>
         <Tab.Screen name="My Team" component={MyTeamScreen} />
@@ -56,7 +61,7 @@ export default function App() {
           <Stack.Screen name="Calendar" component={CalendarScreen} />
         </Stack.Group>
       </Stack.Navigator>
-      <StatusBar />
+      <StatusBar style="light" />
     </NavigationContainer>
   );
 }

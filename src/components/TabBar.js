@@ -1,5 +1,6 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import * as Constants from "./constants";
 
 export function TabBar({ state, descriptors, insets, navigation }) {
   return (
@@ -8,6 +9,7 @@ export function TabBar({ state, descriptors, insets, navigation }) {
         flexDirection: "row",
         paddingBottom: insets.bottom,
         paddingTop: 10,
+        backgroundColor: Constants.darkBg,
       }}
     >
       {state.routes.map((route, index) => {
@@ -18,9 +20,8 @@ export function TabBar({ state, descriptors, insets, navigation }) {
             : options.title !== undefined
             ? options.title
             : route.name;
-
         const isFocused = state.index === index;
-        const tabColor = isFocused ? "#bada55" : "gray";
+        const tabColor = isFocused ? "#bada55" : Constants.lightText;
 
         const onPress = () => {
           const event = navigation.emit({
@@ -74,7 +75,7 @@ export function TabBar({ state, descriptors, insets, navigation }) {
               alignItems: "center",
             }}
           >
-            <Ionicons name={iconName} size={32} color={tabColor} />
+            <Ionicons name={iconName} size={24} color={tabColor} />
             <Text style={{ color: tabColor }}>{label}</Text>
           </TouchableOpacity>
         );
