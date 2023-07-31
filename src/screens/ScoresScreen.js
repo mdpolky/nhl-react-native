@@ -42,11 +42,9 @@ const GameCard = (props) => {
 export default function ScoresScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [games, setGames] = useState([[]]);
-  const [searchDate, setSearchDate] = useState("2023-07-30");
-
-  if (route.params && route.params.searchDate) {
-    setSearchDate(route.params.searchDate);
-  }
+  const searchDate = route.params?.searchDate
+    ? route.params.searchDate
+    : "2023-07-30"; //TODO: should default to today()?
 
   useEffect(() => {
     navigation.setOptions({
@@ -62,7 +60,7 @@ export default function ScoresScreen({ navigation, route }) {
       setGames(result);
       setIsLoading(false);
     });
-  }, []);
+  }, [route.params?.searchDate]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -96,18 +94,24 @@ const styles = StyleSheet.create({
   },
   gamesContainer: {
     flex: 1,
-    gap: 20,
+    gap: 10,
+    alignItems: "space-between",
+    marginTop: 10,
   },
   noGamesContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   gameCardContainer: {
     height: 150,
-    borderWidth: 1,
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderBlockColor: "lightgray",
     flexDirection: "row",
     padding: 50,
+    backgroundColor: "#fff",
   },
   leftCard: {
     flex: 1,

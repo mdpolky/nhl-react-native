@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 
 {
-  /* todo: get team images for table cells */
+  /* TODO: get team images for table cells */
 }
 const TeamIcon = ({ team }) => {
   return (

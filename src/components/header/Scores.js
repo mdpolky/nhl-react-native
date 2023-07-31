@@ -3,7 +3,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 export function ScoresHeaderLeft({ navigation, searchDate }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Calendar")}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("Calendar", { searchDate: searchDate })
+      }
+    >
       <Text style={{ paddingLeft: 10, color: "#bada55" }}>{searchDate}</Text>
     </TouchableOpacity>
   );

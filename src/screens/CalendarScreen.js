@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
 import { CalendarList } from "react-native-calendars";
 
 export default function CalendarScreen({ navigation, route }) {
@@ -13,6 +12,7 @@ export default function CalendarScreen({ navigation, route }) {
       pagingEnabled={true}
       onDayPress={(day) => {
         setSelected(day.dateString);
+        navigation.navigate("Scores", { searchDate: day.dateString });
       }}
       markedDates={{
         [selected]: {
@@ -23,5 +23,3 @@ export default function CalendarScreen({ navigation, route }) {
     />
   );
 }
-
-const styles = StyleSheet.create({});
