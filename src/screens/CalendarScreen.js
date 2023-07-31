@@ -3,7 +3,7 @@ import { CalendarList } from "react-native-calendars";
 
 export default function CalendarScreen({ navigation, route }) {
   const [selected, setSelected] = useState(
-    route.params && route.params.searchDate ? route.params.searchDate : ""
+    route.params?.searchDate ? route.params.searchDate : ""
   );
   return (
     <CalendarList

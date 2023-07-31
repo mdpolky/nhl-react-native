@@ -42,11 +42,11 @@ const GameCard = (props) => {
 export default function ScoresScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [games, setGames] = useState([[]]);
-  const searchDate = route.params?.searchDate
-    ? route.params.searchDate
-    : "2023-07-30"; //TODO: should default to today()?
-
+  const [searchDate, setSearchDate] = useState(
+    route.params?.searchDate ? route.params.searchDate : ""
+  );
   useEffect(() => {
+    if (route.params) setSearchDate(route.params.searchDate);
     navigation.setOptions({
       headerLeft: () => (
         <ScoresHeaderLeft navigation={navigation} searchDate={searchDate} />
@@ -60,7 +60,7 @@ export default function ScoresScreen({ navigation, route }) {
       setGames(result);
       setIsLoading(false);
     });
-  }, [route.params?.searchDate]);
+  });
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
