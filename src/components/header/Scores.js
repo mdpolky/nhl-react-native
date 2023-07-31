@@ -3,14 +3,24 @@ import { getHeaderTitle } from "@react-navigation/elements";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Constants from "../constants";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { format, parse } from "date-fns";
+import { format, parse, add, sub } from "date-fns";
+
+const dateStringFormat = "yyyy-MM-dd";
+
+function parseDate(date) {
+  const formatString = "yyyy-MM-dd";
+  return parse(date, formatString, new Date());
+}
 
 function ScoresHeaderLeft({ navigation, searchDate }) {
+  const parsedDate = parseDate(searchDate);
+  const previousDate = sub(parsedDate, { days: 1 });
+  const formattedDate = format(previousDate, dateStringFormat);
   return (
     <TouchableOpacity
       style={styles.headerLeft}
-      onPress={
-        () => navigation.navigate("Scores", { searchDate: "2023-01-01" }) //TODO: searchDate-1
+      onPress={() =>
+        navigation.navigate("Scores", { searchDate: formattedDate })
       }
     >
       <Ionicons name="chevron-back" size={24} style={styles.headerLeftIcon} />
@@ -19,7 +29,7 @@ function ScoresHeaderLeft({ navigation, searchDate }) {
 }
 
 function ScoresHeaderCenter({ navigation, searchDate }) {
-  const parsedDate = parse(searchDate, "yyyy-MM-dd", new Date());
+  const parsedDate = parseDate(searchDate);
   const formattedDate = format(parsedDate, "cccc ',' LLLL do");
   return (
     <TouchableOpacity
@@ -37,11 +47,14 @@ function ScoresHeaderCenter({ navigation, searchDate }) {
 }
 
 function ScoresHeaderRight({ navigation, searchDate }) {
+  const parsedDate = parseDate(searchDate);
+  const nextDate = add(parsedDate, { days: 1 });
+  const formattedDate = format(nextDate, dateStringFormat);
   return (
     <TouchableOpacity
       style={styles.headerRight}
-      onPress={
-        () => navigation.navigate("Scores", { searchDate: "2023-01-03" }) //TODO: searchDate+1
+      onPress={() =>
+        navigation.navigate("Scores", { searchDate: formattedDate })
       }
     >
       <Ionicons
@@ -59,7 +72,7 @@ export function ScoresHeader(props) {
   return (
     <View
       style={{
-        height: insets.top + 44,
+        height: insets.top + 44 + 10,
         paddingTop: insets.top,
         backgroundColor: Constants.darkBg,
       }}

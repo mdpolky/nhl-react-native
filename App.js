@@ -8,8 +8,8 @@ import ScoresScreen from "./src/screens/ScoresScreen";
 import StandingsScreen from "./src/screens/StandingsScreen";
 import MenuScreen from "./src/screens/MenuScreen";
 import CalendarScreen from "./src/screens/CalendarScreen";
-import { ScoresHeader } from "./src/components/header/Scores";
 import { TabBar } from "./src/components/TabBar";
+import { ScoresHeader } from "./src/components/header/Scores";
 import * as Constants from "./src/components/constants";
 
 const Tab = createBottomTabNavigator();
@@ -30,11 +30,7 @@ function TabStack() {
       <Tab.Group>
         <Tab.Screen name="My Team" component={MyTeamScreen} />
         <Tab.Screen name="News" component={NewsScreen} />
-        <Tab.Screen
-          name="Scores"
-          component={ScoresScreen}
-          options={({ navigation }) => ({})}
-        />
+        <Tab.Screen name="Scores" component={ScoresScreen} />
         <Tab.Screen name="Standings" component={StandingsScreen} />
         <Tab.Screen name="Menu" component={MenuScreen} />
       </Tab.Group>
