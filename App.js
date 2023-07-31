@@ -8,10 +8,7 @@ import ScoresScreen from "./src/screens/ScoresScreen";
 import StandingsScreen from "./src/screens/StandingsScreen";
 import MenuScreen from "./src/screens/MenuScreen";
 import CalendarScreen from "./src/screens/CalendarScreen";
-import {
-  ScoresHeaderLeft,
-  ScoresHeaderRight,
-} from "./src/components/header/Scores";
+import { ScoresHeader } from "./src/components/header/Scores";
 import { TabBar } from "./src/components/TabBar";
 import * as Constants from "./src/components/constants";
 
@@ -36,10 +33,7 @@ function TabStack() {
         <Tab.Screen
           name="Scores"
           component={ScoresScreen}
-          options={({ navigation }) => ({
-            headerLeft: () => <ScoresHeaderLeft navigation={navigation} />,
-            headerRight: () => <ScoresHeaderRight navigation={navigation} />,
-          })}
+          options={({ navigation }) => ({})}
         />
         <Tab.Screen name="Standings" component={StandingsScreen} />
         <Tab.Screen name="Menu" component={MenuScreen} />

@@ -1,4 +1,3 @@
-<script src="http://localhost:8097"></script>;
 import { useState, useEffect } from "react";
 import {
   ActivityIndicator,
@@ -8,10 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
-import {
-  ScoresHeaderRight,
-  ScoresHeaderLeft,
-} from "../components/header/Scores";
+import { ScoresHeader } from "../components/header/Scores";
 import * as Constants from "../components/constants";
 
 const GameCard = (props) => {
@@ -49,12 +45,7 @@ export default function ScoresScreen({ navigation, route }) {
   useEffect(() => {
     if (route.params) setSearchDate(route.params.searchDate);
     navigation.setOptions({
-      headerLeft: () => (
-        <ScoresHeaderLeft navigation={navigation} searchDate={searchDate} />
-      ),
-      headerRight: () => (
-        <ScoresHeaderRight navigation={navigation} searchDate={searchDate} />
-      ),
+      header: (props) => <ScoresHeader {...props} searchDate={searchDate} />,
     });
 
     NhlClient.getGames(searchDate).then((result) => {
