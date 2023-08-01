@@ -1,10 +1,11 @@
-import { SvgUri } from "react-native-svg";
+import { Image } from "expo-image";
 
-export const NhlTeamSvg = (props) => {
+export const NhlTeamIcon = (props) => {
   return (
-    <SvgUri
+    <Image
       {...props}
-      uri={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${props.id}.svg`}
+      contentFit="scale-down"
+      source={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${props.id}.svg`}
     />
   );
 };

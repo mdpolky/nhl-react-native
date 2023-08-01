@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
-import { NhlTeamSvg } from "../components/shared/common";
+import { NhlTeamIcon } from "../components/shared/common";
 
 export default function MyTeamScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +33,7 @@ export default function MyTeamScreen() {
           <View style={styles.container}>
             {teams.map((id) => (
               <TouchableOpacity key={id} onPress={() => setSelectedTeamId(id)}>
-                <NhlTeamSvg
+                <NhlTeamIcon
                   style={
                     id === selectedTeamId
                       ? styles.selectedTeamLogo

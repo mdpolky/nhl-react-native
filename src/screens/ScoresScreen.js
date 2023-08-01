@@ -9,16 +9,17 @@ import {
 import * as NhlClient from "../clients/NhlApi";
 import { ScoresHeader } from "../components/header/Scores";
 import * as Constants from "../components/constants";
-import { NhlTeamSvg } from "../components/shared/common";
+import { NhlTeamIcon } from "../components/shared/common";
 
 const GameCard = (props) => {
   const game = props.game;
+  const teamIconSize = 75;
   const isHomeWin = game.teams.home.score > game.teams.away.score;
   return (
     <View style={styles.gameCardContainer}>
       <View style={styles.teamRow}>
-        <NhlTeamSvg
-          style={{ width: 50, height: 50 }}
+        <NhlTeamIcon
+          style={{ width: teamIconSize, height: teamIconSize }}
           id={game.teams.away.team.id}
         />
         <Text style={!isHomeWin ? styles.highlightTeamValue : styles.teamValue}>
@@ -31,8 +32,8 @@ const GameCard = (props) => {
         </Text>
       </View>
       <View style={styles.teamRow}>
-        <NhlTeamSvg
-          style={{ width: 50, height: 50 }}
+        <NhlTeamIcon
+          style={{ width: teamIconSize, height: teamIconSize }}
           id={game.teams.home.team.id}
         />
         <Text style={isHomeWin ? styles.highlightTeamValue : styles.teamValue}>
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   gameCardContainer: {
-    height: 150,
+    height: 170,
     width: "100%",
     borderBottomWidth: 1,
     borderTopWidth: 1,
