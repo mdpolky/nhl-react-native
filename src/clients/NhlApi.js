@@ -1,5 +1,6 @@
 import { View, Text } from "react-native";
-import { NhlTeamIcon, nhlTeamAbbreviations } from "../components/shared/common";
+import { NhlTeamIcon } from "../components/shared/common";
+import { nhlTeamAbbreviations } from "../components/constants";
 
 const TeamTableCell = ({ rank, team, teamId }) => {
   return (

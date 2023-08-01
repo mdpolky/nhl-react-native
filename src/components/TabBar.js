@@ -1,8 +1,11 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Constants from "./constants";
+import { NhlTeamIcon } from "../components/shared/common";
+import { useMyTeamStore } from "../Store";
 
 export function TabBar({ state, descriptors, insets, navigation }) {
+  const selectedTeamId = useMyTeamStore((state) => state.selectedTeamId);
   return (
     <View
       style={{
@@ -77,7 +80,14 @@ export function TabBar({ state, descriptors, insets, navigation }) {
               alignItems: "center",
             }}
           >
-            <Ionicons name={iconName} size={24} color={tabColor} />
+            {route.name === "My Team" && selectedTeamId !== null ? (
+              <NhlTeamIcon
+                style={{ width: 37, height: 37 }}
+                id={selectedTeamId}
+              />
+            ) : (
+              <Ionicons name={iconName} size={35} color={tabColor} />
+            )}
             <Text style={{ color: tabColor }}>{label}</Text>
           </TouchableOpacity>
         );

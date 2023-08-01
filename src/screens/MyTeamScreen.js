@@ -9,12 +9,7 @@ import {
 import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
 import { NhlTeamIcon } from "../components/shared/common";
-import { createWithEqualityFn } from "zustand/traditional";
-
-const useMyTeamStore = createWithEqualityFn((set) => ({
-  selectedTeamId: 28,
-  setSelectedTeamId: (teamId) => set(() => ({ selectedTeamId: teamId })),
-}));
+import { useMyTeamStore } from "../Store";
 
 export default function MyTeamScreen() {
   const [isLoading, setIsLoading] = useState(true);
