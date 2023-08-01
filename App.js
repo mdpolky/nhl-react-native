@@ -9,8 +9,10 @@ import StandingsScreen from "./src/screens/StandingsScreen";
 import MenuScreen from "./src/screens/MenuScreen";
 import CalendarScreen from "./src/screens/CalendarScreen";
 import { TabBar } from "./src/components/TabBar";
-import { ScoresHeader } from "./src/components/header/Scores";
 import * as Constants from "./src/components/constants";
+import { LogBox } from "react-native";
+
+LogBox.ignoreLogs(["Webview Process Terminated"]);
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

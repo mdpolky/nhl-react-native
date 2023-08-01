@@ -1,23 +1,28 @@
 import { View, Text } from "react-native";
+import { NhlTeamIcon, nhlTeamAbbreviations } from "../components/shared/common";
 
-{
-  /* TODO: get team images for table cells */
-}
-const TeamIcon = ({ team }) => {
+const TeamTableCell = ({ rank, team, teamId }) => {
   return (
-    <View>
-      <Text>{team}</Text>
+    <View style={{ flexDirection: "row" }}>
+      <Text>{rank}</Text>
+      <NhlTeamIcon style={{ width: 25, height: 25 }} id={teamId} />
+      <Text>{nhlTeamAbbreviations[team]}</Text>
     </View>
   );
 };
 
-function dataToRow(data) {
+function standingsTableRow(data, index) {
   if (!data) {
     throw new TypeError("The data passed to dataToRow has an issue");
   }
   return [
-    data.team.name,
-    //<TeamIcon team={data["team"]["name"]} />,
+    //"1 ANA",
+    //data.team.name,
+    <TeamTableCell
+      rank={index + 1}
+      team={data["team"]["name"]}
+      teamId={data["team"]["id"]}
+    />,
     data.gamesPlayed,
     data.leagueRecord.wins,
     data.leagueRecord.losses,
@@ -36,7 +41,9 @@ export async function getStandings() {
       "https://statsapi.web.nhl.com/api/v1/standings/byLeague"
     );
     const json = await response.json();
-    return json.records[0].teamRecords.map(dataToRow);
+    return json.records[0].teamRecords.map((teamRecord, index) =>
+      standingsTableRow(teamRecord, index)
+    );
   } catch (error) {
     console.error(error);
   }
