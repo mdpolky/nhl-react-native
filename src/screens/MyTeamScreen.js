@@ -6,9 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { SvgUri } from "react-native-svg";
 import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
+import { NhlTeamSvg } from "../components/shared/common";
 
 export default function MyTeamScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,13 +33,13 @@ export default function MyTeamScreen() {
           <View style={styles.container}>
             {teams.map((id) => (
               <TouchableOpacity key={id} onPress={() => setSelectedTeamId(id)}>
-                <SvgUri
+                <NhlTeamSvg
                   style={
                     id === selectedTeamId
                       ? styles.selectedTeamLogo
                       : styles.teamLogo
                   }
-                  uri={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${id}.svg`}
+                  id={id}
                 />
               </TouchableOpacity>
             ))}

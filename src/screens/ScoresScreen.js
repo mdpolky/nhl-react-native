@@ -9,26 +9,38 @@ import {
 import * as NhlClient from "../clients/NhlApi";
 import { ScoresHeader } from "../components/header/Scores";
 import * as Constants from "../components/constants";
+import { NhlTeamSvg } from "../components/shared/common";
 
 const GameCard = (props) => {
   const game = props.game;
   const isHomeWin = game.teams.home.score > game.teams.away.score;
   return (
     <View style={styles.gameCardContainer}>
-      <View style={styles.leftCard}>
-        <Text style={!isHomeWin ? styles.highlightCardValue : styles.cardValue}>
+      <View style={styles.teamRow}>
+        <NhlTeamSvg
+          style={{ width: 50, height: 50 }}
+          id={game.teams.away.team.id}
+        />
+        <Text style={!isHomeWin ? styles.highlightTeamValue : styles.teamValue}>
           {game.teams.away.team.name}
         </Text>
-        <Text style={isHomeWin ? styles.highlightCardValue : styles.cardValue}>
-          {game.teams.home.team.name}
-        </Text>
-      </View>
-
-      <View style={styles.rightCard}>
-        <Text style={!isHomeWin ? styles.highlightCardValue : styles.cardValue}>
+        <Text
+          style={!isHomeWin ? styles.highlightScoreValue : styles.scoreValue}
+        >
           {game.teams.away.score}
         </Text>
-        <Text style={isHomeWin ? styles.highlightCardValue : styles.cardValue}>
+      </View>
+      <View style={styles.teamRow}>
+        <NhlTeamSvg
+          style={{ width: 50, height: 50 }}
+          id={game.teams.home.team.id}
+        />
+        <Text style={isHomeWin ? styles.highlightTeamValue : styles.teamValue}>
+          {game.teams.home.team.name}
+        </Text>
+        <Text
+          style={isHomeWin ? styles.highlightScoreValue : styles.scoreValue}
+        >
           {game.teams.home.score}
         </Text>
       </View>
@@ -98,26 +110,38 @@ const styles = StyleSheet.create({
   },
   gameCardContainer: {
     height: 150,
+    width: "100%",
     borderBottomWidth: 1,
     borderTopWidth: 1,
     borderBlockColor: "lightgray",
-    flexDirection: "row",
-    padding: 50,
+    padding: 10,
     backgroundColor: "#fff",
-  },
-  leftCard: {
-    flex: 1,
     justifyContent: "center",
   },
+  teamRow: { flexDirection: "row" },
   rightCard: {
     flex: 1,
     justifyContent: "center",
     alignItems: "flex-end",
   },
-  highlightCardValue: {
+  highlightTeamValue: {
     fontWeight: "600",
+    alignSelf: "center",
   },
-  cardValue: {
+  teamValue: {
     fontWeight: "300",
+    alignSelf: "center",
+  },
+  highlightScoreValue: {
+    fontWeight: "600",
+    alignSelf: "center",
+    marginLeft: "auto",
+    fontSize: 24,
+  },
+  scoreValue: {
+    fontWeight: "300",
+    alignSelf: "center",
+    marginLeft: "auto",
+    fontSize: 24,
   },
 });
