@@ -1,3 +1,4 @@
+<script src="http://10.5.0.2:8097"></script>;
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";

@@ -1,24 +1,10 @@
-import { View, Text } from "react-native";
-import { NhlTeamIcon } from "../components/shared/common";
-import { nhlTeamAbbreviations } from "../components/constants";
-
-const TeamTableCell = ({ rank, team, teamId }) => {
-  return (
-    <View style={{ flexDirection: "row" }}>
-      <Text>{rank}</Text>
-      <NhlTeamIcon style={{ width: 25, height: 25 }} id={teamId} />
-      <Text>{nhlTeamAbbreviations[team]}</Text>
-    </View>
-  );
-};
+import { TeamTableCell } from "../components/Standings";
 
 function standingsTableRow(data, index) {
   if (!data) {
     throw new TypeError("The data passed to dataToRow has an issue");
   }
   return [
-    //"1 ANA",
-    //data.team.name,
     <TeamTableCell
       rank={index + 1}
       team={data["team"]["name"]}
