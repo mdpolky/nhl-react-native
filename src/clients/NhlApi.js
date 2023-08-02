@@ -1,36 +1,10 @@
-import { TeamTableCell } from "../components/Standings";
-
-function standingsTableRow(data, index) {
-  if (!data) {
-    throw new TypeError("The data passed to dataToRow has an issue");
-  }
-  return [
-    <TeamTableCell
-      rank={index + 1}
-      team={data["team"]["name"]}
-      teamId={data["team"]["id"]}
-    />,
-    data.gamesPlayed,
-    data.leagueRecord.wins,
-    data.leagueRecord.losses,
-    data.leagueRecord.ot,
-    data.points,
-    Math.round((data.pointsPercentage + Number.EPSILON) * 1000) / 1000,
-    data.goalsScored,
-    data.goalsAgainst,
-    data.goalsScored - data.goalsAgainst,
-  ];
-}
-
 export async function getStandings() {
   try {
     const response = await fetch(
       "https://statsapi.web.nhl.com/api/v1/standings/byLeague"
     );
     const json = await response.json();
-    return json.records[0].teamRecords.map((teamRecord, index) =>
-      standingsTableRow(teamRecord, index)
-    );
+    return json.records[0];
   } catch (error) {
     console.error(error);
   }

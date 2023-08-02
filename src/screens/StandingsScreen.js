@@ -1,61 +1,37 @@
-import React, { Component, useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
-import { Table, Row } from "react-native-reanimated-table";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
+import { TeamTableCell, StandingsTable } from "../components/Standings";
 
-const StandingsTable = (props) => {
-  const tableHead = [
-    "NHL",
-    "GP",
-    "W",
-    "L",
-    "OT",
-    "PTS",
-    "P%",
-    "GF",
-    "GA",
-    "DIFF",
+function toStandingsTableRow(data, index, arr) {
+  if (!data) {
+    throw new TypeError("The data passed to dataToRow has an issue");
+  }
+  return [
+    <TeamTableCell
+      rank={index + 1}
+      team={data["team"]["name"]}
+      teamId={data["team"]["id"]}
+    />,
+    data.gamesPlayed,
+    data.leagueRecord.wins,
+    data.leagueRecord.losses,
+    data.leagueRecord.ot,
+    data.points,
+    Math.round((data.pointsPercentage + Number.EPSILON) * 1000) / 1000,
+    data.goalsScored,
+    data.goalsAgainst,
+    data.goalsScored - data.goalsAgainst,
   ];
-  const widthArr = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-  const rowArray = props.rows;
-
-  return (
-    <ScrollView horizontal={true}>
-      <View>
-        <Table borderStyle={styles.tableHeaderBorder}>
-          <Row
-            data={tableHead}
-            widthArr={widthArr}
-            style={styles.headerRow}
-            textStyle={styles.headerText}
-          />
-        </Table>
-        <ScrollView style={styles.dataWrapper}>
-          <Table borderStyle={styles.tableBorder}>
-            {rowArray.map((row, index) => (
-              <Row
-                key={index}
-                data={row}
-                widthArr={widthArr}
-                style={[styles.row, index % 2 && styles.altRow]}
-                textStyle={styles.text}
-              />
-            ))}
-          </Table>
-        </ScrollView>
-      </View>
-    </ScrollView>
-  );
-};
+}
 
 export default function StandingsScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [tableRows, setTableRows] = useState([[]]);
-
   useEffect(() => {
     NhlClient.getStandings().then((result) => {
-      setTableRows(result);
+      setTableRows(result.teamRecords.map(toStandingsTableRow));
       setIsLoading(false);
     });
   }, []);
@@ -80,35 +56,5 @@ const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
-  },
-  headerRow: {
-    height: 50,
-    backgroundColor: "#fafafa",
-  },
-  text: {
-    textAlign: "center",
-    fontWeight: "100",
-  },
-  headerText: {
-    textAlign: "center",
-    fontWeight: 700,
-  },
-  dataWrapper: {
-    marginTop: -1,
-  },
-  row: {
-    height: 40,
-    backgroundColor: "#fff",
-  },
-  altRow: {
-    backgroundColor: "#fafafa",
-  },
-  tableHeaderBorder: {
-    borderWidth: 1,
-    borderColor: "#C1C0B9",
-  },
-  tableBorder: {
-    borderWidth: 1,
-    borderColor: "#C1C0B9",
   },
 });

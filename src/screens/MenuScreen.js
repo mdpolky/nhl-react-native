@@ -19,11 +19,21 @@ const About = () => {
   );
 };
 
-function MenuListItem({ item, index, separators }) {
+function MenuListItem({ item, index, separators, navigation }) {
+  const navigateTo = () => {
+    switch (item.key) {
+      case "Rosters":
+        navigation.navigate("Roster");
+        break;
+      default:
+        console.log(`case for ${item.key} missing in MenuScreen`);
+    }
+  };
+
   return (
     <TouchableHighlight
       key={item.key}
-      onPress={() => console.log(`quit touching me -${item.key}`)} //TODO: add navigate to screen?
+      onPress={navigateTo}
       underlayColor="lightgray"
       onShowUnderlay={separators.highlight}
       onHideUnderlay={separators.unhighlight}
@@ -36,7 +46,7 @@ function MenuListItem({ item, index, separators }) {
   );
 }
 
-export default function MenuScreen() {
+export default function MenuScreen({ navigation }) {
   const menuItems = [
     { key: "Stats" },
     { key: "Standings" },
@@ -47,7 +57,9 @@ export default function MenuScreen() {
     <View style={styles.container}>
       <FlatList
         data={menuItems}
-        renderItem={(props) => <MenuListItem {...props} />}
+        renderItem={(props) => (
+          <MenuListItem {...props} navigation={navigation} />
+        )}
         ItemSeparatorComponent={(props) => {
           return (
             <View

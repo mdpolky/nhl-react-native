@@ -9,6 +9,7 @@ import ScoresScreen from "./src/screens/ScoresScreen";
 import StandingsScreen from "./src/screens/StandingsScreen";
 import MenuScreen from "./src/screens/MenuScreen";
 import CalendarScreen from "./src/screens/CalendarScreen";
+import RosterScreen from "./src/screens/RosterScreen";
 import { TabBar } from "./src/components/TabBar";
 import * as Constants from "./src/components/constants";
 import { LogBox } from "react-native";
@@ -37,6 +38,7 @@ function TabStack() {
         <Tab.Screen name="Standings" component={StandingsScreen} />
         <Tab.Screen name="Menu" component={MenuScreen} />
       </Tab.Group>
+      <Tab.Screen name="Roster" component={RosterScreen} />
     </Tab.Navigator>
   );
 }

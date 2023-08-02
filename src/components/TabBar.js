@@ -6,6 +6,10 @@ import { useMyTeamStore } from "../Store";
 
 export function TabBar({ state, descriptors, insets, navigation }) {
   const selectedTeamId = useMyTeamStore((state) => state.selectedTeamId);
+  const hiddenTabs = ["Roster"];
+  const displayedRoutes = state.routes.filter(
+    (route) => !hiddenTabs.includes(route.name)
+  );
   return (
     <View
       style={{
@@ -15,7 +19,7 @@ export function TabBar({ state, descriptors, insets, navigation }) {
         backgroundColor: Constants.darkBg,
       }}
     >
-      {state.routes.map((route, index) => {
+      {displayedRoutes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
@@ -62,7 +66,7 @@ export function TabBar({ state, descriptors, insets, navigation }) {
           case "Standings":
             iconName = isFocused ? "ios-bar-chart" : "ios-bar-chart-outline";
             break;
-          default:
+          case "Menu":
             iconName = isFocused ? "ios-menu" : "ios-menu-outline";
         }
 
