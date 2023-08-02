@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { NhlTeamIcon } from "../components/shared/common";
 import { nhlTeamAbbreviations } from "../components/constants";
-import { Table, Row } from "react-native-reanimated-table";
+import { Table, Row } from "react-native-table-component";
 
 export const TeamTableCell = ({ rank, team, teamId }) => {
   return (
