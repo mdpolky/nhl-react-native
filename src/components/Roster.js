@@ -1,5 +1,19 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Table, Row } from "react-native-reanimated-table";
+import { PlayerThumbnail } from "./shared/common";
+
+export const PlayerTableCell = ({ id, name }) => {
+  return (
+    <View style={styles.playerCellContainer}>
+      <View style={styles.playerLeft}>
+        <PlayerThumbnail style={styles.playerPhoto} id={id} />
+      </View>
+      <View style={styles.playerRight}>
+        <Text>{name}</Text>
+      </View>
+    </View>
+  );
+};
 
 export const RosterTable = (props) => {
   const tableHead = [
@@ -61,7 +75,6 @@ const styles = StyleSheet.create({
     marginTop: -1,
   },
   row: {
-    height: 40,
     backgroundColor: "#fff",
   },
   altRow: {
@@ -74,5 +87,18 @@ const styles = StyleSheet.create({
   tableBorder: {
     borderWidth: 1,
     borderColor: "#C1C0B9",
+  },
+  playerCellContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  playerLeft: { margin: 5 },
+  playerRight: { flex: 1 },
+  playerPhoto: {
+    height: 40,
+    width: 40,
+    borderRadius: "50%",
+    borderWidth: 1,
+    borderColor: "lightgray",
   },
 });

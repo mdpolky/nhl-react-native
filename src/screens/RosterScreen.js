@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
-import { RosterTable } from "../components/Roster";
+import { PlayerTableCell, RosterTable } from "../components/Roster";
 
 function formatBirthplace(person) {
   const city = person["birthCity"];
@@ -23,7 +23,10 @@ function toRosterTableRow(data, index, arr) {
     throw new TypeError("The data passed to toRosterTableRow has an issue");
   }
   return [
-    data["person"]["fullName"],
+    <PlayerTableCell
+      id={data["person"]["id"]}
+      name={data["person"]["fullName"]}
+    />,
     data["person"]["primaryNumber"],
     data["person"]["primaryPosition"]["abbreviation"],
     data["person"]["shootsCatches"],
@@ -51,7 +54,6 @@ function isGoalie(data, index, arr) {
 export default function RosterScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roster, setRoster] = useState([[]]);
-  //roster.filter(isDefender).map(toRosterTableRow)
 
   useEffect(() => {
     NhlClient.getRoster(route.params?.teamId).then((result) => {

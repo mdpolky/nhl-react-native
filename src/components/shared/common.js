@@ -9,3 +9,12 @@ export const NhlTeamIcon = (props) => {
     />
   );
 };
+
+export const PlayerThumbnail = (props) => {
+  return (
+    <Image
+      {...props}
+      source={`https://cms.nhl.bamgrid.com/images/headshots/current/60x60/${props.id}.jpg`}
+    />
+  );
+};
