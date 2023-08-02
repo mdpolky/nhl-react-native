@@ -9,6 +9,18 @@ export async function getStandings() {
     console.error(error);
   }
 }
+//teamId: 28
+export async function getRoster(teamId) {
+  try {
+    const response = await fetch(
+      `https://statsapi.web.nhl.com/api/v1/teams/${teamId}/roster?expand=roster.person`
+    );
+    const json = await response.json();
+    return json.roster;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export async function getTeams() {
   try {

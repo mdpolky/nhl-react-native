@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { useMyTeamStore } from "../Store";
 
 const About = () => {
   return (
@@ -20,10 +21,11 @@ const About = () => {
 };
 
 function MenuListItem({ item, index, separators, navigation }) {
+  const selectedTeamId = useMyTeamStore((state) => state.selectedTeamId);
   const navigateTo = () => {
     switch (item.key) {
       case "Rosters":
-        navigation.navigate("Roster");
+        navigation.navigate("Roster", { teamId: selectedTeamId });
         break;
       default:
         console.log(`case for ${item.key} missing in MenuScreen`);

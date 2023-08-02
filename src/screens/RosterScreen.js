@@ -1,6 +1,12 @@
-import { useState } from "react";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
-import { rosterMoq } from "../Store";
+import { useState, useEffect } from "react";
+import {
+  ScrollView,
+  View,
+  Text,
+  ActivityIndicator,
+  StyleSheet,
+} from "react-native";
+import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
 import { RosterTable } from "../components/Roster";
 
@@ -28,10 +34,32 @@ function toRosterTableRow(data, index, arr) {
   ];
 }
 
-export default function RosterScreen() {
-  const [isLoading, setIsLoading] = useState(false); //TODO: Wire this up, should start as true
-  const result = rosterMoq;
-  const tableRows = result.map(toRosterTableRow);
+function isForward(data, index, arr) {
+  return ["C", "LW", "RW"].includes(
+    data["person"]["primaryPosition"]["abbreviation"]
+  );
+}
+
+function isDefender(data, index, arr) {
+  return data["person"]["primaryPosition"]["abbreviation"] === "D";
+}
+
+function isGoalie(data, index, arr) {
+  return data["person"]["primaryPosition"]["abbreviation"] === "G";
+}
+
+export default function RosterScreen({ navigation, route }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [roster, setRoster] = useState([[]]);
+  //roster.filter(isDefender).map(toRosterTableRow)
+
+  useEffect(() => {
+    NhlClient.getRoster(route.params?.teamId).then((result) => {
+      setRoster(result);
+      setIsLoading(false);
+    });
+  }, [route.params?.teamId]);
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -39,7 +67,14 @@ export default function RosterScreen() {
           <ActivityIndicator size="large" color={Constants.accentColor} />
         </View>
       ) : (
-        <RosterTable rows={tableRows} />
+        <ScrollView>
+          <Text style={styles.tableTitle}>Forwards</Text>
+          <RosterTable rows={roster.filter(isForward).map(toRosterTableRow)} />
+          <Text style={styles.tableTitle}>Defensemen</Text>
+          <RosterTable rows={roster.filter(isDefender).map(toRosterTableRow)} />
+          <Text style={styles.tableTitle}>Goalies</Text>
+          <RosterTable rows={roster.filter(isGoalie).map(toRosterTableRow)} />
+        </ScrollView>
       )}
     </View>
   );
@@ -52,5 +87,10 @@ const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
+  },
+  tableTitle: {
+    fontSize: 30,
+    paddingTop: 20,
+    paddingBottom: 5,
   },
 });
