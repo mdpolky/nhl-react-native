@@ -6,7 +6,7 @@ import { TeamTableCell, StandingsTable } from "../components/Standings";
 
 function toStandingsTableRow(data, index, arr) {
   if (!data) {
-    throw new TypeError("The data passed to dataToRow has an issue");
+    throw new TypeError("The data passed to toStandingsTableRow has an issue");
   }
   return [
     <TeamTableCell
@@ -31,7 +31,7 @@ export default function StandingsScreen() {
   const [tableRows, setTableRows] = useState([[]]);
   useEffect(() => {
     NhlClient.getStandings().then((result) => {
-      setTableRows(result.teamRecords.map(toStandingsTableRow));
+      setTableRows(result.map(toStandingsTableRow));
       setIsLoading(false);
     });
   }, []);

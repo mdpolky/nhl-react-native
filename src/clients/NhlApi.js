@@ -4,7 +4,7 @@ export async function getStandings() {
       "https://statsapi.web.nhl.com/api/v1/standings/byLeague"
     );
     const json = await response.json();
-    return json.records[0];
+    return json.records[0].teamRecords;
   } catch (error) {
     console.error(error);
   }

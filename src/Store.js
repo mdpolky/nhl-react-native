@@ -6,7 +6,7 @@ export const useMyTeamStore = createWithEqualityFn((set) => ({
   removeSelectedTeamId: () => set(() => ({ selectedTeamId: null })),
 }));
 
-const rosterMoq = [
+export const rosterMoq = [
   {
     person: {
       id: 8479316,
