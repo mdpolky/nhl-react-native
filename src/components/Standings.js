@@ -17,10 +17,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingLeft: 5,
-    paddingRight: 5,
   },
-  teamRank: { flexGrow: 1, flexBasis: 0 },
-  teamIcon: { flexGrow: 2, flexBasis: 0, width: 25, height: 25 },
-  teamAbb: { flexGrow: 2, flexBasis: 0 },
+  teamRank: { width: 25, paddingLeft: 5 },
+  teamIcon: {
+    width: 35,
+    height: 35,
+  },
+  teamAbb: { width: 35 },
 });
