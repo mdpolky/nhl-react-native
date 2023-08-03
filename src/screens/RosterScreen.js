@@ -9,19 +9,23 @@ import {
 import * as NhlClient from "../clients/NhlApi";
 import * as Constants from "../components/constants";
 import { PlayerTableCell, RosterTable } from "../components/Roster";
+import { format } from "date-fns";
+import { parseDate } from "../util/date";
 
-function formatBirthplace(person) {
-  const city = person["birthCity"];
-  const stateProvince = person["birthStateProvince"];
-  const country = person["birthCountry"];
-
+function formatBirthplace(city, stateProvince, country) {
   return [city, stateProvince, country].filter((val) => val).join(", ");
+}
+
+function formatBirthdate(birthDate) {
+  const parsedDate = parseDate(birthDate);
+  return format(parsedDate, "MMM d ',' yyyy");
 }
 
 function toRosterTableRow(data, index, arr) {
   if (!data) {
     throw new TypeError("The data passed to toRosterTableRow has an issue");
   }
+
   return [
     <PlayerTableCell
       id={data["person"]["id"]}
@@ -32,8 +36,12 @@ function toRosterTableRow(data, index, arr) {
     data["person"]["shootsCatches"],
     data["person"]["height"],
     data["person"]["weight"],
-    data["person"]["birthDate"], //TODO: format date "JAN 1, 1989"
-    formatBirthplace(data["person"]),
+    formatBirthdate(data["person"]["birthDate"]),
+    formatBirthplace(
+      data["person"]["birthCity"],
+      data["person"]["birthStateProvince"],
+      data["person"]["birthCountry"]
+    ),
   ];
 }
 

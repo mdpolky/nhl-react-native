@@ -3,14 +3,8 @@ import { getHeaderTitle } from "@react-navigation/elements";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Constants from "../constants";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { format, parse, add, sub } from "date-fns";
-
-const dateStringFormat = "yyyy-MM-dd";
-
-function parseDate(date) {
-  const formatString = "yyyy-MM-dd";
-  return parse(date, formatString, new Date());
-}
+import { format, add, sub } from "date-fns";
+import { parseDate, dateStringFormat } from "../../util/date";
 
 function ScoresHeaderLeft({ navigation, searchDate }) {
   const parsedDate = parseDate(searchDate);
