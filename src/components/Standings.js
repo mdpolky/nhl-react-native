@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { NhlTeamIcon } from "../components/shared/common";
 import { nhlTeamAbbreviations } from "../components/constants";
-import { Table, Row } from "react-native-table-component";
+import { Table } from "../components/shared/Table";
 
 export const TeamTableCell = ({ rank, team, teamId }) => {
   return (
@@ -14,7 +14,7 @@ export const TeamTableCell = ({ rank, team, teamId }) => {
 };
 
 export const StandingsTable = (props) => {
-  const tableHead = [
+  const headers = [
     "NHL",
     "GP",
     "W",
@@ -26,36 +26,9 @@ export const StandingsTable = (props) => {
     "GA",
     "DIFF",
   ];
-  const widthArr = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-  const rowArray = props.rows;
+  const columnWidths = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
 
-  return (
-    <ScrollView horizontal={true}>
-      <View>
-        <Table borderStyle={styles.tableHeaderBorder}>
-          <Row
-            data={tableHead}
-            widthArr={widthArr}
-            style={styles.headerRow}
-            textStyle={styles.headerText}
-          />
-        </Table>
-        <ScrollView style={styles.dataWrapper}>
-          <Table borderStyle={styles.tableBorder}>
-            {rowArray.map((row, index) => (
-              <Row
-                key={index}
-                data={row}
-                widthArr={widthArr}
-                style={[styles.row, index % 2 && styles.altRow]}
-                textStyle={styles.text}
-              />
-            ))}
-          </Table>
-        </ScrollView>
-      </View>
-    </ScrollView>
-  );
+  return <Table headers={headers} columnWidths={columnWidths} {...props} />;
 };
 
 const styles = StyleSheet.create({

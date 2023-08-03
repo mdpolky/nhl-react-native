@@ -28,10 +28,10 @@ function toStandingsTableRow(data, index, arr) {
 
 export default function StandingsScreen() {
   const [isLoading, setIsLoading] = useState(true);
-  const [tableRows, setTableRows] = useState([[]]);
+  const [rows, setRows] = useState([[]]);
   useEffect(() => {
     NhlClient.getStandings().then((result) => {
-      setTableRows(result.map(toStandingsTableRow));
+      setRows(result.map(toStandingsTableRow));
       setIsLoading(false);
     });
   }, []);
@@ -43,7 +43,7 @@ export default function StandingsScreen() {
           <ActivityIndicator size="large" color={Constants.accentColor} />
         </View>
       ) : (
-        <StandingsTable rows={tableRows} />
+        <StandingsTable rows={rows} />
       )}
     </View>
   );

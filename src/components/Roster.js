@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Table, Row } from "react-native-table-component";
+import { Table } from "../components/shared/Table";
 import { PlayerThumbnail } from "./shared/common";
 
 export const PlayerTableCell = ({ id, name }) => {
@@ -16,46 +16,10 @@ export const PlayerTableCell = ({ id, name }) => {
 };
 
 export const RosterTable = (props) => {
-  const tableHead = [
-    "Player",
-    "#",
-    "Pos",
-    "Sh",
-    "Ht",
-    "Wt",
-    "Dob",
-    "Birthplace",
-  ];
-  const widthArr = [150, 50, 50, 50, 50, 50, 100, 150];
-  const rowArray = props.rows;
+  const headers = ["Player", "#", "Pos", "Sh", "Ht", "Wt", "Dob", "Birthplace"];
+  const columnWidths = [150, 50, 50, 50, 50, 50, 100, 150];
 
-  return (
-    <ScrollView horizontal={true}>
-      <View>
-        <Table borderStyle={styles.tableHeaderBorder}>
-          <Row
-            data={tableHead}
-            widthArr={widthArr}
-            style={styles.headerRow}
-            textStyle={styles.headerText}
-          />
-        </Table>
-        <ScrollView style={styles.dataWrapper}>
-          <Table borderStyle={styles.tableBorder}>
-            {rowArray.map((row, index) => (
-              <Row
-                key={index}
-                data={row}
-                widthArr={widthArr}
-                style={[styles.row, index % 2 && styles.altRow]}
-                textStyle={styles.text}
-              />
-            ))}
-          </Table>
-        </ScrollView>
-      </View>
-    </ScrollView>
-  );
+  return <Table headers={headers} columnWidths={columnWidths} {...props} />;
 };
 
 const styles = StyleSheet.create({
