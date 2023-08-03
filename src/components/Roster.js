@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderWidth: 1,
   },
-  playerLeft: { width: 50 },
-  playerRight: { width: 100 },
+  playerLeft: { width: 40, margin: 5 },
+  playerRight: { width: 95, marginRight: 5 },
   playerPhoto: {
     height: 40,
     width: 40,
