@@ -55,9 +55,11 @@ const styles = StyleSheet.create({
   playerCellContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 1,
   },
-  playerLeft: { margin: 5 },
-  playerRight: { flex: 1 },
+  playerLeft: { width: 50 },
+  playerRight: { width: 100 },
   playerPhoto: {
     height: 40,
     width: 40,

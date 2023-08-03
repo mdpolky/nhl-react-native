@@ -2,14 +2,13 @@ import { isValidElement } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 
 function Cell(props) {
-  const width = props.width || 50;
+  const width = props.width;
+  const isElement = isValidElement(props.data);
   return (
-    <View style={[styles.cell, { width: width }]}>
-      {isValidElement(props.data) ? (
-        <View>{props.data}</View>
-      ) : (
-        <Text>{props.data}</Text>
-      )}
+    <View
+      style={isElement ? { width: width } : [styles.cell, { width: width }]}
+    >
+      {isElement ? <View>{props.data}</View> : <Text>{props.data}</Text>}
     </View>
   );
 }
@@ -60,5 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
   },
 });
