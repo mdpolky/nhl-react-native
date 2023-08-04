@@ -23,40 +23,10 @@ export const RosterTable = (props) => {
 };
 
 const styles = StyleSheet.create({
-  headerRow: {
-    height: 50,
-    backgroundColor: "#fafafa",
-  },
-  text: {
-    textAlign: "center",
-    fontWeight: "100",
-  },
-  headerText: {
-    textAlign: "center",
-    fontWeight: 700,
-  },
-  dataWrapper: {
-    marginTop: -1,
-  },
-  row: {
-    backgroundColor: "#fff",
-  },
-  altRow: {
-    backgroundColor: "#fafafa",
-  },
-  tableHeaderBorder: {
-    borderWidth: 1,
-    borderColor: "#C1C0B9",
-  },
-  tableBorder: {
-    borderWidth: 1,
-    borderColor: "#C1C0B9",
-  },
   playerCellContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    borderWidth: 1,
   },
   playerLeft: { width: 40, margin: 5 },
   playerRight: { width: 95, marginRight: 5 },

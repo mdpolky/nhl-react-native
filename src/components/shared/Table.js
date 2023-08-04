@@ -8,17 +8,27 @@ function Cell(props) {
     <View
       style={isElement ? { width: width } : [styles.cell, { width: width }]}
     >
-      {isElement ? <View>{props.data}</View> : <Text>{props.data}</Text>}
+      {isElement ? (
+        <View>{props.data}</View>
+      ) : (
+        <Text style={props.textStyle}>{props.data}</Text>
+      )}
     </View>
   );
 }
 
 function Row(props) {
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, props.rowStyle]}>
       {props.data.map((cell, i) => {
         return (
-          <Cell key={i} id={i} data={cell} width={props.columnWidths[i]} />
+          <Cell
+            key={i}
+            id={i}
+            data={cell}
+            width={props.columnWidths[i]}
+            textStyle={props.textStyle}
+          />
         );
       })}
     </View>
@@ -40,7 +50,12 @@ export function Table(props) {
     <ScrollView horizontal={true}>
       <View style={styles.table}>
         <View style={styles.headers}>
-          <Row data={props.headers} columnWidths={props.columnWidths} />
+          <Row
+            data={props.headers}
+            columnWidths={props.columnWidths}
+            rowStyle={styles.headerRow}
+            textStyle={styles.headerText}
+          />
         </View>
         <ScrollView>
           <Rows {...props} />
@@ -53,12 +68,13 @@ export function Table(props) {
 const styles = StyleSheet.create({
   table: {},
   headers: {},
+  headerRow: { height: 50 },
+  headerText: { fontSize: 14 },
   rows: {},
   row: { flexDirection: "row" },
   cell: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 1,
   },
 });
