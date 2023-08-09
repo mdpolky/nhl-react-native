@@ -1,3 +1,4 @@
+<script src="http://10.0.0.41:8097"></script>;
 import { useState, useEffect } from "react";
 import {
   ActivityIndicator,
@@ -32,10 +33,15 @@ function TeamSelect() {
 }
 
 function SelectedTeam() {
-  const team = "sharks";
+  const selectedTeamId = useMyTeamStore((state) => state.selectedTeamId);
   return (
-    <View>
-      <Text>The {team} are great!</Text>
+    <View style={{ flex: 1 }}>
+      <Text>Sharks</Text>
+      <NhlTeamIcon
+        id={selectedTeamId}
+        style={{ flex: 1, justifyContent: "flex-end" }}
+        contentFit="contain"
+      />
     </View>
   );
 }
