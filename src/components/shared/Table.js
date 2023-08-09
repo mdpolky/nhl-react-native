@@ -1,5 +1,6 @@
 import { isValidElement } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
+import * as Constants from "../constants";
 
 function Cell(props) {
   const width = props.width;
@@ -39,7 +40,8 @@ function Rows(props) {
   return (
     <View style={styles.rows}>
       {props.rows.map((row, i) => {
-        return <Row key={i} data={row} {...props} />;
+        const rowStyle = i % 2 ? styles.altRow : styles.row;
+        return <Row key={i} data={row} rowStyle={rowStyle} {...props} />;
       })}
     </View>
   );
@@ -68,10 +70,14 @@ export function Table(props) {
 const styles = StyleSheet.create({
   table: {},
   headers: {},
-  headerRow: { height: 50 },
-  headerText: { fontSize: 14 },
+  headerRow: {
+    height: 50,
+    backgroundColor: Constants.darkBg,
+  },
+  headerText: { fontSize: 14, color: Constants.lightText },
   rows: {},
-  row: { flexDirection: "row" },
+  row: { flexDirection: "row", backgroundColor: Constants.lightBg },
+  altRow: { backgroundColor: "white" },
   cell: {
     flex: 1,
     alignItems: "center",
