@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
-import * as Constants from "../components/constants";
+import * as Theme from "../components/theme";
 import { PlayerTableCell, RosterTable } from "../components/Roster";
 import { format } from "date-fns";
 import { parseDate } from "../util/date";
@@ -74,7 +74,7 @@ export default function RosterScreen({ navigation, route }) {
     <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={Constants.accentColor} />
+          <ActivityIndicator size="large" color={Theme.accentColor} />
         </View>
       ) : (
         <ScrollView>

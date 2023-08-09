@@ -1,10 +1,4 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, FlatList } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { useMyTeamStore } from "../Store";

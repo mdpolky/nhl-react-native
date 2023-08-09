@@ -1,6 +1,6 @@
 import { isValidElement } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
-import * as Constants from "../constants";
+import * as Theme from "../theme";
 
 function Cell(props) {
   const width = props.width;
@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
   headers: {},
   headerRow: {
     height: 50,
-    backgroundColor: Constants.darkBg,
+    backgroundColor: Theme.darkBg,
   },
-  headerText: { fontSize: 14, color: Constants.lightText },
+  headerText: { fontSize: 14, color: Theme.lightText },
   rows: {},
-  row: { flexDirection: "row", backgroundColor: Constants.lightBg },
+  row: { flexDirection: "row", backgroundColor: Theme.lightBg },
   altRow: { backgroundColor: "white" },
   cell: {
     flex: 1,

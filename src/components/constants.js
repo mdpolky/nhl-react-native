@@ -1,9 +1,3 @@
-//styles
-export const lightBg = "#f0f0f0";
-export const darkBg = "#2f2f2f";
-export const lightText = "#fdfdfd";
-export const accentColor = "#bada55";
-
 //lookup map to shorten team names when not included in json response
 export const nhlTeamAbbreviations = {
   "Anaheim Ducks": "ANA",
@@ -38,4 +32,39 @@ export const nhlTeamAbbreviations = {
   "Vegas Golden Knights": "VGK",
   "Washington Capitals": "WSH",
   "Winnipeg Jets": "WPG",
+};
+
+export const nhlTeamThemes = {
+  1: "#CE1126",
+  2: "#F95602",
+  3: "#CE1126",
+  4: "#D24303",
+  5: "#FBB92F",
+  6: "#FCB514",
+  7: "#FCB514",
+  8: "#AF1E2D",
+  9: "#CE1126",
+  10: "#002868",
+  12: "#cc0000",
+  13: "#BF910C",
+  14: "#333F48",
+  15: "#CE1126",
+  16: "#CF0A2C",
+  17: "#e51937",
+  18: "#FCB514",
+  19: "#FCB514",
+  20: "#CE1126",
+  21: "#75263D",
+  22: "#FF4C00",
+  23: "#008751",
+  24: "#F95602",
+  25: "#006847",
+  26: "#ADAFAA",
+  28: "#006D75",
+  29: "#CE1126",
+  30: "#154734",
+  52: "#0060A5",
+  53: "#8C2633",
+  54: "#85714d",
+  55: "#001628",
 };

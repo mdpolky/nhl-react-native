@@ -1,7 +1,8 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import * as Constants from "./constants";
+import * as Theme from "../components/theme";
 import { NhlTeamIcon } from "../components/shared/common";
+import { nhlTeamThemes } from "./constants";
 import { useMyTeamStore } from "../Store";
 
 export function TabBar({ state, descriptors, insets, navigation }) {
@@ -16,7 +17,7 @@ export function TabBar({ state, descriptors, insets, navigation }) {
         flexDirection: "row",
         paddingBottom: insets.bottom,
         paddingTop: 10,
-        backgroundColor: Constants.darkBg,
+        backgroundColor: Theme.darkBg,
       }}
     >
       {displayedRoutes.map((route, index) => {
@@ -29,8 +30,8 @@ export function TabBar({ state, descriptors, insets, navigation }) {
             : route.name;
         const isFocused = state.index === index;
         const tabColor = isFocused
-          ? Constants.accentColor
-          : Constants.lightText;
+          ? nhlTeamThemes[selectedTeamId]
+          : Theme.lightText;
 
         const onPress = () => {
           const event = navigation.emit({

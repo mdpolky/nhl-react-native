@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
 import { ScoresHeader } from "../components/header/Scores";
-import * as Constants from "../components/constants";
+import * as Theme from "../components/theme";
 import { NhlTeamIcon } from "../components/shared/common";
 
 const GameCard = (props) => {
@@ -71,7 +71,7 @@ export default function ScoresScreen({ navigation, route }) {
     <ScrollView contentContainerStyle={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={Constants.accentColor} />
+          <ActivityIndicator size="large" color={Theme.accentColor} />
         </View>
       ) : games ? (
         <View style={styles.gamesContainer}>

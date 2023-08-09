@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
-import * as Constants from "../components/constants";
+import * as Theme from "../components/theme";
 import { NhlTeamIcon } from "../components/shared/common";
 import { useMyTeamStore } from "../Store";
 
@@ -30,7 +30,7 @@ export default function MyTeamScreen() {
     <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={Constants.accentColor} />
+          <ActivityIndicator size="large" color={Theme.accentColor} />
         </View>
       ) : (
         <ScrollView>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   selectedTeamLogo: {
     width: 80,
     height: 80,
-    backgroundColor: Constants.accentColor,
+    backgroundColor: Theme.accentColor,
     borderWidth: 1,
   },
 });

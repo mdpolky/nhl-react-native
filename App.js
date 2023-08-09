@@ -1,4 +1,3 @@
-<script src="http://10.5.0.2:8097"></script>;
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,7 +10,7 @@ import MenuScreen from "./src/screens/MenuScreen";
 import CalendarScreen from "./src/screens/CalendarScreen";
 import RosterScreen from "./src/screens/RosterScreen";
 import { TabBar } from "./src/components/TabBar";
-import * as Constants from "./src/components/constants";
+import * as Theme from "./src/components/theme";
 import { LogBox } from "react-native";
 
 LogBox.ignoreLogs(["Webview Process Terminated"]);
@@ -26,9 +25,9 @@ function TabStack() {
       tabBar={(props) => <TabBar {...props} />}
       screenOptions={{
         headerStyle: {
-          backgroundColor: Constants.darkBg,
+          backgroundColor: Theme.darkBg,
         },
-        headerTintColor: Constants.lightText,
+        headerTintColor: Theme.lightText,
       }}
     >
       <Tab.Group>

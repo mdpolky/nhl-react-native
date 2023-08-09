@@ -1,3 +1,5 @@
+import { nhlTeamThemes } from "../components/constants";
+
 export async function getStandings() {
   try {
     const response = await fetch(

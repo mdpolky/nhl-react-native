@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
-import * as Constants from "../components/constants";
+import * as Theme from "../components/theme";
 import { TeamTableCell, StandingsTable } from "../components/Standings";
 
 function toStandingsTableRow(data, index, arr) {
@@ -40,7 +40,7 @@ export default function StandingsScreen() {
     <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={Constants.accentColor} />
+          <ActivityIndicator size="large" color={Theme.accentColor} />
         </View>
       ) : (
         <StandingsTable rows={rows} />
