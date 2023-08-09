@@ -2,21 +2,49 @@ import { useState, useEffect } from "react";
 import {
   ActivityIndicator,
   ScrollView,
-  View,
   StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 import * as NhlClient from "../clients/NhlApi";
 import * as Theme from "../components/theme";
 import { NhlTeamIcon } from "../components/shared/common";
 import { useMyTeamStore } from "../Store";
 
+function TeamSelect() {
+  const [teams, setSelectedTeamId] = useMyTeamStore((state) => [
+    state.teams,
+    state.setSelectedTeamId,
+  ]);
+
+  return (
+    <ScrollView>
+      <View style={styles.teamsContainer}>
+        {teams.map((id) => (
+          <TouchableOpacity key={id} onPress={() => setSelectedTeamId(id)}>
+            <NhlTeamIcon style={styles.teamLogo} id={id} />
+          </TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
+function SelectedTeam() {
+  const team = "sharks";
+  return (
+    <View>
+      <Text>The {team} are great!</Text>
+    </View>
+  );
+}
+
 export default function MyTeamScreen() {
   const [isLoading, setIsLoading] = useState(true);
-  const [teams, setTeams] = useState([[]]);
-  const [selectedTeamId, setSelectedTeamId] = useMyTeamStore((state) => [
+  const [selectedTeamId, setTeams] = useMyTeamStore((state) => [
     state.selectedTeamId,
-    state.setSelectedTeamId,
+    state.setTeams,
   ]);
 
   useEffect(() => {
@@ -28,21 +56,19 @@ export default function MyTeamScreen() {
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color={Theme.accentColor} />
-        </View>
-      ) : (
-        <ScrollView>
-          <View style={styles.teamsContainer}>
-            {teams.map((id) => (
-              <TouchableOpacity key={id} onPress={() => setSelectedTeamId(id)}>
-                <NhlTeamIcon style={styles.teamLogo} id={id} />
-              </TouchableOpacity>
-            ))}
-          </View>
-        </ScrollView>
-      )}
+      {(() => {
+        if (isLoading) {
+          return (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color={Theme.accentColor} />
+            </View>
+          );
+        } else if (selectedTeamId) {
+          return <SelectedTeam />;
+        } else {
+          return <TeamSelect />;
+        }
+      })()}
     </View>
   );
 }
