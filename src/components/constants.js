@@ -34,6 +34,7 @@ export const nhlTeamAbbreviations = {
   "Winnipeg Jets": "WPG",
 };
 
+//teamId: themeColor
 export const nhlTeamThemes = {
   1: "#CE1126",
   2: "#F95602",
@@ -67,4 +68,39 @@ export const nhlTeamThemes = {
   53: "#8C2633",
   54: "#85714d",
   55: "#001628",
+};
+
+export const nhlTeamNicknames = {
+  1: "Devils",
+  2: "Isles",
+  3: "Rangers",
+  4: "Flyers",
+  5: "Penguins",
+  6: "Bruins",
+  7: "Sabres",
+  8: "Habs",
+  9: "Senators",
+  10: "Leafs",
+  12: "Canes",
+  13: "Panthers",
+  14: "Lightning",
+  15: "Caps",
+  16: "Hawks",
+  17: "Red Wings",
+  18: "Predators",
+  19: "Blues",
+  20: "Flames",
+  21: "Avs",
+  22: "Oilers",
+  23: "Canucks",
+  24: "Ducks",
+  25: "Stars",
+  26: "Kings",
+  28: "Sharks",
+  29: "Jackets",
+  30: "Wild",
+  52: "Jets",
+  53: "Coyotes",
+  54: "Knights",
+  55: "Kraken",
 };

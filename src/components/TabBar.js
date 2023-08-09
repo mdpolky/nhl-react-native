@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Theme from "../components/theme";
 import { NhlTeamIcon } from "../components/shared/common";
-import { nhlTeamThemes } from "./constants";
+import { nhlTeamThemes, nhlTeamNicknames } from "./constants";
 import { useMyTeamStore } from "../Store";
 
 export function TabBar({ state, descriptors, insets, navigation }) {
@@ -23,10 +23,8 @@ export function TabBar({ state, descriptors, insets, navigation }) {
       {displayedRoutes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
+          selectedTeamId && route.name === "My Team"
+            ? nhlTeamNicknames[selectedTeamId]
             : route.name;
         const isFocused = state.index === index;
         const tabColor = isFocused

@@ -34,17 +34,10 @@ export default function MyTeamScreen() {
         </View>
       ) : (
         <ScrollView>
-          <View style={styles.container}>
+          <View style={styles.teamsContainer}>
             {teams.map((id) => (
               <TouchableOpacity key={id} onPress={() => setSelectedTeamId(id)}>
-                <NhlTeamIcon
-                  style={
-                    id === selectedTeamId
-                      ? styles.selectedTeamLogo
-                      : styles.teamLogo
-                  }
-                  id={id}
-                />
+                <NhlTeamIcon style={styles.teamLogo} id={id} />
               </TouchableOpacity>
             ))}
           </View>
@@ -57,23 +50,21 @@ export default function MyTeamScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    backgroundColor: "white",
   },
   loadingContainer: {
     flex: 1,
     justifyContent: "center",
   },
-  teamLogo: {
-    width: 80,
-    height: 80,
+  teamsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 5,
+    padding: 10,
   },
-  selectedTeamLogo: {
-    width: 80,
-    height: 80,
-    backgroundColor: Theme.accentColor,
-    borderWidth: 1,
+  teamLogo: {
+    width: 70,
+    height: 70,
   },
 });
